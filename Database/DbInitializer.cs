@@ -33,7 +33,8 @@ namespace CinemaTicketManagementSystem.Database
                         new Actor() {
                             FullName =  "Amir Khan",
                             ProfilePictureUrl = "https://www.google.com/imgres?imgurl=https%3A%2F%2Fakm-img-a-in.tosshub.com%2Findiatoday%2Fimages%2Fstory%2F202111%2F964609-aamirkhan-socialmedia.jpg%3Fsqx_s6Fzu3kV6.liN7BrYoZG5MX.At4F%26size%3D770%3A433&imgrefurl=https%3A%2F%2Fwww.indiatoday.in%2Fmovies%2Fcelebrities%2Fstory%2Faamir-khan-s-third-wedding-rumours-are-fake-source-1879593-2021-11-22&tbnid=Szr3YM6NY-cQMM&vet=12ahUKEwjw0vft6_L0AhUDNxoKHZiXBBkQMygCegUIARDTAQ..i&docid=taUxPJFKfyRr9M&w=770&h=433&itg=1&q=amir%20khan&ved=2ahUKEwjw0vft6_L0AhUDNxoKHZiXBBkQMygCegUIARDTAQ",
-                            Bio = "Comes with new Ideas"
+                            Bio = "Comes with new Ideas",
+                            Country = "India"
                         }
                     };
                     context.Actors.AddRange(actors);

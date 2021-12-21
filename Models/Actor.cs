@@ -7,7 +7,7 @@ namespace CinemaTicketManagementSystem.Models
     {
         [Key]
         public int Id { get; set; }
-        [Display(Name = "Profile Picture Url")]
+        [Display(Name = "Profile Picture")]
         public string ProfilePictureUrl { get; set; }
 
         [Display(Name = "Full Name")]
