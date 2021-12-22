@@ -2,7 +2,7 @@
 
 namespace CinemaTicketManagementSystem.Controllers
 {
-    public class Handler : Controller
+    public class ErrorHandlerController : Controller
     {
         public IActionResult PageNotFound()
         {

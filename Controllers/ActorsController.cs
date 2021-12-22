@@ -1,4 +1,5 @@
 ﻿using CinemaTicketManagementSystem.Database;
+using CinemaTicketManagementSystem.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -8,15 +9,15 @@ namespace CinemaTicketManagementSystem.Controllers
 {
     public class ActorsController : Controller
     {
-        private readonly CinemaTicketDbContext _dbContext;
-        public ActorsController(CinemaTicketDbContext dbContext)
+        private readonly IActorsService _service;
+        public ActorsController(IActorsService service)
         {
-            _dbContext = dbContext; 
+            _service = service;
         }
         public async Task<IActionResult> Index()
         {
-            var actorsList = await _dbContext.Actors.ToListAsync();
-            return View(actorsList);
+            var actors = await _service.GetAll("","");
+            return View(actors);
         }
     }
 }

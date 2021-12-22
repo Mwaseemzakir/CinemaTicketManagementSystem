@@ -1,4 +1,5 @@
 using CinemaTicketManagementSystem.Database;
+using CinemaTicketManagementSystem.Utils;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,6 +31,10 @@ namespace CinemaTicketManagementSystem
 
             //Database Context Configuration
             services.AddDbContext<CinemaTicketDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")));
+
+            //Dependency Injection ; I have created a class which contains all depedencies here I am calling it 
+            //All Scoped Injection
+            services.InjectServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,12 +59,13 @@ namespace CinemaTicketManagementSystem
                 This is custom middleware
                     app.UseStatusCodePagesWithRedirects
 
+                Use in each middleware indicates that it will call next mddleware automatically
                  */
-                app.UseStatusCodePagesWithRedirects("/Handler/PageNotFound");
+                app.UseStatusCodePagesWithRedirects("/ErrorHandler/PageNotFound");
             }
             else
             {
-                app.UseExceptionHandler("/Handler/PageNotFound");
+                app.UseExceptionHandler("/ErrorHandler/PageNotFound");
                 app.UseHsts();
             }
             app.UseHttpsRedirection();

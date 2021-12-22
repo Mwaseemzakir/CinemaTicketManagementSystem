@@ -1,24 +1,19 @@
-﻿using CinemaTicketManagementSystem.Database;
-using CinemaTicketManagementSystem.Models;
+﻿using CinemaTicketManagementSystem.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
 using System.Threading.Tasks;
 namespace CinemaTicketManagementSystem.Controllers
 {
     public class MoviesController : Controller
-    {
-        private readonly CinemaTicketDbContext _dbContext;
-        public MoviesController(CinemaTicketDbContext dbContext)
+    { 
+        private readonly IMoviesService _service;
+        public MoviesController(IMoviesService service)
         {
-            _dbContext = dbContext;
+            _service = service;
         }
         public async Task<IActionResult> Index()
         {
-            var moviesList = await _dbContext.Movies
-                            .Include(x => x.Cinema)
-                            .ToListAsync();
-            ViewBag.Movies = moviesList;
+            var movies = await _service.GetAll("");
+            ViewBag.Movies = movies;
             return View();
         }
     }

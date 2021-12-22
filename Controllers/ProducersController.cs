@@ -1,4 +1,5 @@
 ﻿using CinemaTicketManagementSystem.Database;
+using CinemaTicketManagementSystem.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
@@ -7,16 +8,17 @@ namespace CinemaTicketManagementSystem.Controllers
 {
     public class ProducersController : Controller
     {
-        private readonly CinemaTicketDbContext _dbContext;
-        public ProducersController(CinemaTicketDbContext dbContext)
+
+        private readonly IProducersService _service;
+        public ProducersController(IProducersService service)
         {
-            _dbContext = dbContext;
+            _service = service;
         }
+
         public async Task<IActionResult> Index()
         {
-            var producersList = await _dbContext.Producers.ToListAsync();
+            var producersList = await _service.GetAll("");
             ViewBag.Producers = producersList;
-            ViewBag.Title = "Producers List";
             return View();
         }
     }
