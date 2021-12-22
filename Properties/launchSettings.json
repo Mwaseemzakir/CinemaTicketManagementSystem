@@ -14,7 +14,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
-    },
+    }, 
     "CinemaTicketManagementSystem": {
       "commandName": "Project",
       "dotnetRunMessages": "true",

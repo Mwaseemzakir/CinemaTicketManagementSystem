@@ -16,6 +16,7 @@ namespace CinemaTicketManagementSystem.Database
                 am.MovieId
             });
 
+            
             model.Entity<Actors_Movies>().HasOne(mov => mov.Movie).WithMany(am => am.ActorsMovies).HasForeignKey(fk => fk.MovieId);
             model.Entity<Actors_Movies>().HasOne(act => act.Actor).WithMany(am => am.ActorsMovies).HasForeignKey(fk => fk.ActorId);
 

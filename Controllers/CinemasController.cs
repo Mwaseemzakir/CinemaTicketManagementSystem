@@ -15,6 +15,7 @@ namespace CinemaTicketManagementSystem.Controllers
         public async Task<IActionResult> Index()
         {
             var cinemasList = await _dbContext.Cinemas.ToListAsync();
+            ViewBag.Cinemas = cinemasList; 
             return View();
         }
 

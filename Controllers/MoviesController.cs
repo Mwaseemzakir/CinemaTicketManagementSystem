@@ -1,6 +1,8 @@
 ﻿using CinemaTicketManagementSystem.Database;
+using CinemaTicketManagementSystem.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Threading.Tasks;
 namespace CinemaTicketManagementSystem.Controllers
 {
@@ -13,7 +15,10 @@ namespace CinemaTicketManagementSystem.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var moviesList = await _dbContext.Movies.ToListAsync();
+            var moviesList = await _dbContext.Movies
+                            .Include(x => x.Cinema)
+                            .ToListAsync();
+            ViewBag.Movies = moviesList;
             return View();
         }
     }

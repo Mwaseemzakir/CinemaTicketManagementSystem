@@ -19,21 +19,6 @@ namespace CinemaTicketManagementSystem.Migrations
                 .HasAnnotation("ProductVersion", "5.0.13")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("CinemaMovie", b =>
-                {
-                    b.Property<int>("CinemaId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MoviesId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CinemaId", "MoviesId");
-
-                    b.HasIndex("MoviesId");
-
-                    b.ToTable("CinemaMovie");
-                });
-
             modelBuilder.Entity("CinemaTicketManagementSystem.Models.Actor", b =>
                 {
                     b.Property<int>("Id")
@@ -130,6 +115,10 @@ namespace CinemaTicketManagementSystem.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CinemaId");
+
+                    b.HasIndex("ProducerId");
+
                     b.ToTable("Movies");
                 });
 
@@ -157,36 +146,6 @@ namespace CinemaTicketManagementSystem.Migrations
                     b.ToTable("Producers");
                 });
 
-            modelBuilder.Entity("MovieProducer", b =>
-                {
-                    b.Property<int>("MoviesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProducerId")
-                        .HasColumnType("int");
-
-                    b.HasKey("MoviesId", "ProducerId");
-
-                    b.HasIndex("ProducerId");
-
-                    b.ToTable("MovieProducer");
-                });
-
-            modelBuilder.Entity("CinemaMovie", b =>
-                {
-                    b.HasOne("CinemaTicketManagementSystem.Models.Cinema", null)
-                        .WithMany()
-                        .HasForeignKey("CinemaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CinemaTicketManagementSystem.Models.Movie", null)
-                        .WithMany()
-                        .HasForeignKey("MoviesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("CinemaTicketManagementSystem.Models.Actors_Movies", b =>
                 {
                     b.HasOne("CinemaTicketManagementSystem.Models.Actor", "Actor")
@@ -206,19 +165,23 @@ namespace CinemaTicketManagementSystem.Migrations
                     b.Navigation("Movie");
                 });
 
-            modelBuilder.Entity("MovieProducer", b =>
+            modelBuilder.Entity("CinemaTicketManagementSystem.Models.Movie", b =>
                 {
-                    b.HasOne("CinemaTicketManagementSystem.Models.Movie", null)
-                        .WithMany()
-                        .HasForeignKey("MoviesId")
+                    b.HasOne("CinemaTicketManagementSystem.Models.Cinema", "Cinema")
+                        .WithMany("Movies")
+                        .HasForeignKey("CinemaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CinemaTicketManagementSystem.Models.Producer", null)
-                        .WithMany()
+                    b.HasOne("CinemaTicketManagementSystem.Models.Producer", "Producer")
+                        .WithMany("Movies")
                         .HasForeignKey("ProducerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Cinema");
+
+                    b.Navigation("Producer");
                 });
 
             modelBuilder.Entity("CinemaTicketManagementSystem.Models.Actor", b =>
@@ -226,9 +189,19 @@ namespace CinemaTicketManagementSystem.Migrations
                     b.Navigation("ActorsMovies");
                 });
 
+            modelBuilder.Entity("CinemaTicketManagementSystem.Models.Cinema", b =>
+                {
+                    b.Navigation("Movies");
+                });
+
             modelBuilder.Entity("CinemaTicketManagementSystem.Models.Movie", b =>
                 {
                     b.Navigation("ActorsMovies");
+                });
+
+            modelBuilder.Entity("CinemaTicketManagementSystem.Models.Producer", b =>
+                {
+                    b.Navigation("Movies");
                 });
 #pragma warning restore 612, 618
         }

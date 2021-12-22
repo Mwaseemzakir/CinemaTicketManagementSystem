@@ -11,8 +11,10 @@ namespace CinemaTicketManagementSystem.Models
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
+
         public string Description { get; set; }
         public double Price { get; set; }
+        [Display(Name = "Logo")]
         public string ImageURL { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
@@ -21,15 +23,17 @@ namespace CinemaTicketManagementSystem.Models
         #region Relationships 
         public List<Actors_Movies> ActorsMovies { get; set; }
 
-        //Cinema
+        //CinemaId is FK here we have def
         [ForeignKey("CinemaId")]
         public int CinemaId { get; set; }
-        public List<Cinema> Cinema { get; set; }
+        public Cinema Cinema { get; set; }
+
 
         //Producer
         [ForeignKey("ProducerId")]
         public int ProducerId { get; set; }
-        public List<Producer> Producer{ get; set; }
+        public Producer Producer{ get; set; }
+
         #endregion
     }
 }
