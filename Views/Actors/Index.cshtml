@@ -23,6 +23,7 @@
                     <th> @Html.DisplayNameFor(model => model.FullName)</th>
                     <th> @Html.DisplayNameFor(model => model.Bio)</th>
                     <th> Actions </th>
+                    <th> <button type="button" class="btn btn-info" asp-controller="Actors" asp-action="Create">Add New Actor</button></th>
                 </tr>
             </thead>
             <tbody>
@@ -49,7 +50,8 @@
 
                             </a>
                             <a class="btn btn-outline-info">
-                                <i class="bi bi-eye" data-toggle="tooltip" data-placement="top" title="Details"></i>
+                               
+                                 <i class="bi bi-eye" data-toggle="tooltip" data-placement="top" title="Details"></i>
 
                             </a>
                             <a class="btn btn-outline-danger">
@@ -60,5 +62,7 @@
                 }
             </tbody>
         </table>
+       
+
     </div>
 </div>

@@ -1,0 +1,52 @@
+﻿@model CinemaTicketManagementSystem.Models.Actor
+
+    <div class="row">
+        <div class="col-md-3 offset-4">
+            <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+            <form asp-action="Create"></form>
+            <div class="form-group">
+                <label for="FullName">FullName</label>
+                <input type="text" class="form-control" id="FullName" placeholder="e.g. Amir Khan">
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="Bio">Bio</label>
+                <input type="text" class="form-control" id="Bio" placeholder="Comes with Innovation..">
+                <span asp-validation-for="Bio" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="Country">Country</label>
+                <select class="form-control" id="Country">
+                    <option>- - - - - - - - - - - - - Select - - - - - - - - - - - - - </option>
+                    <option>Pakistan</option>
+                    <option>India</option>
+                    <option>USA</option>
+                    <option>UK</option>
+                    <option>Korean</option>
+                </select>
+                <span asp-validation-for="Country" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="ProfilePictureUrl">Picture</label>
+                <input type="file" class="form-control-file" id="ProfilePictureUrl">
+            </div>
+           <div>
+               @* <input type="submit" value="Back to List" class="btn btn-primary float-left" />*@
+                <input class="btn btn-primary float-left" type="button"  asp-action="Index" value="Back to List"/>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-info float-right" />
+            </div>
+        </div>
+    </div>
+
+
+    @section Scripts
+    {
+         @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+         }
+    }
+

@@ -61,11 +61,11 @@ namespace CinemaTicketManagementSystem
 
                 Use in each middleware indicates that it will call next mddleware automatically
                  */
-                app.UseStatusCodePagesWithRedirects("/ErrorHandler/PageNotFound");
+                app.UseStatusCodePagesWithRedirects("/ErrorsHandler/PageNotFound");
             }
             else
             {
-                app.UseExceptionHandler("/ErrorHandler/PageNotFound");
+                app.UseExceptionHandler("/ErrorsHandler/PageNotFound");
                 app.UseHsts();
             }
             app.UseHttpsRedirection();

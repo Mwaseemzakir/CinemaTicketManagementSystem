@@ -30,16 +30,26 @@
 
                         <li>
                             <div class="dropdown show">
-                                <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Management
-                                </a>
+                              <a class="dropdown-item" asp-controller="Cinemas" asp-action="Index"> 
+                                  <i class="bi bi-camera-reels"></i> Cinemas
+                               </a>
 
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                      <a class="dropdown-item" asp-controller="Cinemas" asp-action="Index"> <i class="bi bi-camera-reels"></i> Cinemas</a>
-                            <a class="dropdown-item" asp-controller="Producers" asp-action="Index"> <i class="bi bi-headset"></i> Producers</a>
-                            <a class="dropdown-item" asp-controller="Actors" asp-action="Index"> <i class="bi bi-person-square"></i> Actors</a>
-                                </div>
                             </div>
+                        </li>
+                        <li>
+                            <div class="dropdown show">
+                            <a class="dropdown-item" asp-controller="Producers" asp-action="Index"> 
+                                <i class="bi bi-headset"></i> Producers
+                             </a>
+
+                            </div>
+                        </li>
+                        <li>
+                            <div class="dropdown show">
+                              <a class="dropdown-item" asp-controller="Actors" asp-action="Index"> 
+                                  <i class="bi bi-person-square"></i> Actors
+                               </a>
+
                         </li>
                     </ul>
 

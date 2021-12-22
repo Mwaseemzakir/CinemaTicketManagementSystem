@@ -54,9 +54,19 @@ namespace CinemaTicketManagementSystem.Services
             }
         }
 
-        public Task<Actor> GetById(int Id)
+        public async Task<Actor> GetById(int Id)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                if(Id < 0) return new Actor();
+                var item = await _context.Actors.FindAsync(Id); 
+                if(item == null)  return new Actor();
+                return item;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public Task<string> Update(Actor model)

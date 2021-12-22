@@ -19,5 +19,15 @@ namespace CinemaTicketManagementSystem.Controllers
             var actors = await _service.GetAll("","");
             return View(actors);
         }
+        public async Task<IActionResult> Details()
+        {
+            var actors = await _service.GetAll("", "");
+            return View(actors);
+        }
+        public async Task<IActionResult> Create()
+        {
+            //var actors = await _service.GetAll("", "");
+            return View();
+        }
     }
 }
