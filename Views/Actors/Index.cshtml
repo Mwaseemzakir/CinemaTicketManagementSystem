@@ -15,6 +15,7 @@
 <div class="row">
 
     <div class="col-md-8 offset-md-2">
+        <a class="btn btn-info float-right mb-4" asp-action="Create">Add New Actor</a>
         <table class="table">
             <thead>
                 <tr>
@@ -23,18 +24,24 @@
                     <th> @Html.DisplayNameFor(model => model.FullName)</th>
                     <th> @Html.DisplayNameFor(model => model.Bio)</th>
                     <th> Actions </th>
-                    <th> <button type="button" class="btn btn-info" asp-controller="Actors" asp-action="Create">Add New Actor</button></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td class="allign-middle">
+                        @if (item.ProfilePictureUrl != null)
+                       {
+                           <td class="allign-middle">
                             <img class="rounded-circle" src="@item.ProfilePictureUrl" alt="@item.FullName" style="height: 103px;width: 141px;" />
                         </td>
-
-
+                       }
+                         @if (item.ProfilePictureUrl == null)
+                        {
+                             <td class="allign-middle">
+                             <p>Picture was not provided</p>
+                        </td>
+                        }
                         <td class="allign-middle">
                             @Html.DisplayFor(modelItem => item.Country)
                         </td>
@@ -45,16 +52,16 @@
                             @Html.DisplayFor(modelItem => item.Bio)
                         </td>
                         <td class="allign-middle">
-                            <a class="btn btn-outline-success">
+                            <a class="btn btn-outline-success" asp-action="Edit" asp-route-id="@item.Id">
                                 <i class="bi bi-pencil" data-toggle="tooltip" data-placement="top" title="Edit"></i>
 
                             </a>
-                            <a class="btn btn-outline-info">
+                            <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.Id">
                                
-                                 <i class="bi bi-eye" data-toggle="tooltip" data-placement="top" title="Details"></i>
+                                 <i class="bi bi-eye" data-toggle="tooltip" data-placement="top" title="Details" ></i>
 
                             </a>
-                            <a class="btn btn-outline-danger">
+                            <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id">
                                 <i class="bi bi-trash" data-toggle="tooltip" data-placement="top" title="Delete"></i>
                             </a>
                         </td>

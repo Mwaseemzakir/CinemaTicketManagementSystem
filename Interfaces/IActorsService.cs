@@ -8,7 +8,7 @@ namespace CinemaTicketManagementSystem.Interfaces
     {
         public Task<string> Add(Actor model);
         public Task<string> Update(Actor model);
-        public Task<string> Delete(Actor model);
+        public Task<string> Delete(int Id);
         public Task<Actor> GetById(int Id);
         public Task<List<Actor>> GetAll(string name , string country);
     }

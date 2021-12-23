@@ -4,6 +4,7 @@ using CinemaTicketManagementSystem.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,20 +12,59 @@ namespace CinemaTicketManagementSystem.Services
 {
     public class ActorsService : IActorsService
     {
-
         private readonly CinemaTicketDbContext _context;
         public ActorsService(CinemaTicketDbContext context)
         {
             _context = context;
         }
-        public Task<string> Add(Actor model)
+        public async Task<string> Add(Actor model)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                if(model.ProfilePictureUrl != null)
+                {
+                    string imagesFolderPath = "Files/Images";
+
+                    //If Folder does not exists then create it
+                    if (!File.Exists(imagesFolderPath)) 
+                    {
+                        Directory.CreateDirectory(imagesFolderPath);
+                    }
+
+                    // To avoid files name replication I have used GUID
+                    string imageUrl = Guid.NewGuid().ToString() + Path.GetExtension(model.ProfilePictureUrl);
+                    
+                    //Below two lines are responsible to copy image in our images folder
+                    byte[] imageBytes = Convert.FromBase64String(model.ProfilePictureUrl);
+                    File.WriteAllBytes(imagesFolderPath, imageBytes);
+                    model.ProfilePictureUrl = imageUrl;
+                }
+                //Save Data in Table
+                _context.Actors.Add(model);
+                await _context.SaveChangesAsync();
+                return "true";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }   
         }
 
-        public Task<string> Delete(Actor model)
+        public async Task<string> Delete(int Id)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                if(Id <= 0) return "Invalid Id";
+                var actor =await _context.Actors.FindAsync(Id);
+                if(actor == null) return "No record found";
+                _context.Actors.Remove(actor);
+                await _context.SaveChangesAsync();
+                return "true";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
 
         public async Task<List<Actor>> GetAll(string name, string country)
@@ -63,15 +103,26 @@ namespace CinemaTicketManagementSystem.Services
                 if(item == null)  return new Actor();
                 return item;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                return new Actor();
             }
         }
 
-        public Task<string> Update(Actor model)
+        public async Task<string> Update(Actor model)
         {
-            throw new System.NotImplementedException();
+            if (model == null || model.Id <= 0) return "Incomplete Information";
+            var actor = await _context.Actors.FindAsync(model.Id);
+            if (actor == null) return "Record does not exist";
+             if(model.ProfilePictureUrl != null)
+            {
+                //First Remove Existing File from Folder and then Add New One 
+            }
+            actor.Country = model.Country;
+            actor.Bio = model.Bio;
+            actor.FullName = model.FullName;
+            await _context.SaveChangesAsync();
+            return "true";
         }
     }
 }

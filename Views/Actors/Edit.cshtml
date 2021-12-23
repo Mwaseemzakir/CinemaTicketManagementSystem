@@ -1,8 +1,21 @@
 ﻿@model CinemaTicketManagementSystem.Models.Actor
-    <div class="row">
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Update</title>
+</head>
+<body>
+
+<h4>Update Information of @Model.FullName</h4>
+<hr />
+ <div class="row">
         <div class="col-md-3 offset-4">
             <div class="text-danger" asp-validation-summary="ModelOnly"></div>
-            <form asp-action="Create">
+            <form asp-action="Update">
+             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="FullName">FullName</label>
                 <input type="text" class="form-control" id="FullName" placeholder="e.g. Amir Khan" asp-for="FullName">
@@ -32,19 +45,18 @@
                 <input type="file" class="form-control-file" id="ProfilePictureUrl" asp-for="ProfilePictureUrl">
             </div>
            <div>
-                <a class="btn btn-primary float-left"  asp-action="Index">Back to List</a>
+                <a class="btn btn-secondary float-left"  asp-action="Index">Back to List</a>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-info float-right" />
+                <input type="submit" value="Update" class="btn btn-info float-right" />
             </div>
             </form>
         </div>
     </div>
 
-    @section Scripts
-    {
-         @{
-            await Html.RenderPartialAsync("_ValidationScriptsPartial");
-         }
-    }
 
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+</body>
+</html>
