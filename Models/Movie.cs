@@ -18,7 +18,7 @@ namespace CinemaTicketManagementSystem.Models
         public string ImageURL { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public MovieCtegoryEnum MovieCategory { get; set; }
+        public MoviesCategoryEnum MovieCategory { get; set; }
 
         #region Relationships 
         public List<Actors_Movies> ActorsMovies { get; set; }

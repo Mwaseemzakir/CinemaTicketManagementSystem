@@ -16,5 +16,9 @@ namespace CinemaTicketManagementSystem.Controllers
             ViewBag.Movies = movies;
             return View();
         }
+        public IActionResult Create()
+        {
+            return View();
+        }
     }
 }

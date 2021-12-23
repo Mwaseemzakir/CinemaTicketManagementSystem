@@ -1,0 +1,79 @@
+﻿@using CinemaTicketManagementSystem.Enums
+@model CinemaTicketManagementSystem.Models.Movie
+<h4>Add New Movie</h4>
+<hr />
+
+<div class="container">
+    <form asp-action="Create">
+        <div class="row">
+            <div class="col-md-3 col-sm-6">
+                <div class="form-group">
+                    <label asp-for="Name">Movie Name</label>
+                    <input type="text" class="form-control" id="Name" placeholder="e.g. ABC" asp-for="Name">
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="form-group">
+                    <label asp-for="Description">Description</label>
+                    <input type="text" class="form-control" id="Description" placeholder="e.g. Non stop action" asp-for="Description">
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="form-group">
+                    <label asp-for="StartDate">Start Date</label>
+                    <input type="text" class="form-control" id="StartDate" asp-for="StartDate">
+                    <span asp-validation-for="StartDate" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="form-group">
+                    <label asp-for="EndDate">End Date</label>
+                    <input type="text" class="form-control" id="EndDate" asp-for="EndDate">
+                    <span asp-validation-for="EndDate" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="form-group">
+                    <label asp-for="MovieCategory">Movie Category</label>
+                    <select class="form-control" id="MovieCategory" asp-for="MovieCategory">
+                        <option>Select Category</option>
+                        @foreach (var item in Enum.GetValues(typeof(MoviesCategoryEnum)))
+                       {
+                            <option>@item</option>
+                       }
+                      
+                    </select>
+                <span asp-validation-for="MovieCategory" class="text-danger"></span>
+                </div>
+            </div>
+            
+            <div class="col-md-3 col-sm-6">
+                <div class="form-group">
+                    <label asp-for="ImageURL">Poster</label>
+                    <input type="file" class="form-control-file" id="ImageURL" asp-for="ImageURL">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <a class="btn btn-primary float-left" asp-action="Index">Back to List</a>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-info float-right" />
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+@section Scripts
+    {
+         @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+         }
+    }
+

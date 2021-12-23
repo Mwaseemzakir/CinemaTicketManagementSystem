@@ -1,6 +1,6 @@
 ﻿namespace CinemaTicketManagementSystem.Enums
 {
-    public enum MovieCtegoryEnum
+    public enum MoviesCategoryEnum
     {
         Comedy,
         Drama,

@@ -83,7 +83,6 @@ namespace CinemaTicketManagementSystem
                     pattern: "{controller=Movies}/{action=Index}/{id?}");
                 
             });
-            DbInitializer.Seed(app);
         }
     }
 }
