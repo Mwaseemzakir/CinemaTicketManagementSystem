@@ -1,4 +1,5 @@
-﻿@model CinemaTicketManagementSystem.Models.Actor
+﻿@using CinemaTicketManagementSystem.Utils
+@model CinemaTicketManagementSystem.Models.Actor
 
 <!DOCTYPE html>
 
@@ -9,54 +10,56 @@
 </head>
 <body>
 
-<h4>Update Information of @Model.FullName</h4>
-<hr />
- <div class="row">
+    <h4>Update Information of @Model.FullName</h4>
+    <hr />
+    <div class="row">
         <div class="col-md-3 offset-4">
             <div class="text-danger" asp-validation-summary="ModelOnly"></div>
             <form asp-action="Update">
-             <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="FullName">FullName</label>
-                <input type="text" class="form-control" id="FullName" placeholder="e.g. Amir Khan" asp-for="FullName">
-                <span asp-validation-for="FullName" class="text-danger"></span>
-            </div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label asp-for="FullName">FullName</label>
+                    <input type="text" class="form-control" id="FullName" placeholder="e.g. Amir Khan" asp-for="FullName">
+                    <span asp-validation-for="FullName" class="text-danger"></span>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="Bio">Bio</label>
-                <input type="text" class="form-control" id="Bio" placeholder="Comes with Innovation.." asp-for="Bio">
-                <span asp-validation-for="Bio" class="text-danger"></span>
-            </div>
+                <div class="form-group">
+                    <label asp-for="Bio">Bio</label>
+                    <input type="text" class="form-control" id="Bio" placeholder="Comes with Innovation.." asp-for="Bio">
+                    <span asp-validation-for="Bio" class="text-danger"></span>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="Country">Country</label>
-                <select class="form-control" id="Country" asp-for="Country">
-                    <option>- - - - - - - - - - - - - Select - - - - - - - - - - - - - </option>
-                    <option>Pakistan</option>
-                    <option>India</option>
-                    <option>USA</option>
-                    <option>UK</option>
-                    <option>Korean</option>
-                </select>
-                <span asp-validation-for="Country" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ProfilePictureUrl">Picture</label>
-                <input type="file" class="form-control-file" id="ProfilePictureUrl" asp-for="ProfilePictureUrl">
-            </div>
-           <div>
-                <a class="btn btn-secondary float-left"  asp-action="Index">Back to List</a>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Update" class="btn btn-info float-right" />
-            </div>
+                <div class="form-group">
+                    <label asp-for="Country">Country</label>
+                    <select class="form-control selectpicker countrypicker" data-flag="true" asp-for="Country">
+                        <option> Select  Country</option>
+                        @foreach (var item in Countries.GetAll())
+                        {
+                            <option>@item</option>
+                        }
+                        <option></option>
+                    </select>
+                    <span asp-validation-for="Country" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ProfilePictureUrl">Picture</label>
+                    <input type="file" class="form-control-file" id="ProfilePictureUrl" asp-for="ProfilePictureUrl">
+                </div>
+                <div>
+                    <a class="btn btn-secondary float-left" asp-action="Index">Back to List</a>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Update" class="btn btn-info float-right" />
+                </div>
             </form>
         </div>
     </div>
 
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
 }
+    }
 </body>
 </html>
