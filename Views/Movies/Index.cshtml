@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "List of Movies";
 }
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col-6">
             <button class="btn btn-info float-left mb-4" disabled>List of Movies</button>
@@ -20,48 +20,46 @@
                 <div class="card mb-3" style="max-width: 540px;">
                     <div class="row g-0">
                         <div class="col-md-12">
-                            <div class="card-header text-white bg-info">
-                                <p class="card-text">
-                                    <h5 class="card-title">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">
                                         @item.Name
                                     </h5>
-                                </p>
                             </div>
                         </div>
                         @if (@item.ImageURL == null)
                         {
-                            <div class="col-md-6">
-                                <p>No Preview Availble</p>
+                            <div class="col-md-6 pr-md-0 d-flex justify-content-center align-items-center">
+                                <i class="bi bi-image text-danger fa-4x"></i>
                             </div>
                         }
                         @if (@item.ImageURL != null)
                         {
-                            <div class="col-md-6">
-                                <img src="@item.ImageURL" width="100%" alt="@item.Name">
+                            <div class="col-md-6 pr-md-0" >
+                                <img src="@item.ImageURL" width="100%" height="auto" alt="@item.Name">
                             </div>
 
                         }
-
-                        <div class="col-md-6">
+                        
+                        <div class="col-md-6 pl-md-0">
                             <div class="card-body">
                                 <p class="card-text">@item.Description</p>
-                                <p class="card-text"><b>Cinema: </b>@item?.Cinema?.Name</p>
-                                <p class="card-text"><b>Category: </b>@item.MovieCategory</p>
-                                <p class="card-text"><b>Start Date: </b>@item.StartDate.ToString("dd MMM yy")</p>
-                                <p class="card-text"><b>End Date: </b>@item.EndDate.ToString("dd MMM yy")</p>
+                                <p class="card-text"><b>Cinema: </b> <br> <small> @item?.Cinema?.Name</small></p>
+                                <p class="card-text"><b>Category: </b> <br> <small> @item.MovieCategory </small> </p>
+                                <p class="card-text"><b>Start Date: </b> <br><small> @item.StartDate.ToString("dd MMM yy")</small></p>
+                                <p class="card-text"><b>End Date: </b> <br> <small> @item.EndDate.ToString("dd MMM yy") </small></p>
                                 <p class="card-text ">
-                                    <b>Status: </b>
+                                    <b>Status: </b> <br> 
                                     @if (DateTime.Now >= item.StartDate && DateTime.Now <= item.EndDate)
                                     {
-                                        <span class="badge bg-success text-white">RUNNING</span>
+                                        <small class="badge bg-success text-white"> RUNNING</small>
                                     }
                                     else if (DateTime.Now > item.EndDate)
                                     {
-                                        <span class="badge bg-danger text-white">EXPIRED</span>
+                                        <small class="badge bg-danger text-white">EXPIRED</small>
                                     }
                                     else
                                     {
-                                        <span class="badge bg-primary text-white">UPCOMING</span>
+                                        <small class="badge bg-primary text-white">UPCOMING</small>
                                     }
                                 </p>
 

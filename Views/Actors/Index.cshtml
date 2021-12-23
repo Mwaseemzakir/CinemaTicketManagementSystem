@@ -31,16 +31,17 @@
                 {
                     <tr>
                         @if (item.ProfilePictureUrl != null)
-                       {
-                           <td class="allign-middle">
-                            <img class="rounded-circle" src="@item.ProfilePictureUrl" alt="@item.FullName" style="height: 103px;width: 141px;" />
-                        </td>
-                       }
-                         @if (item.ProfilePictureUrl == null)
                         {
-                             <td class="allign-middle">
-                             <p>Picture was not provided</p>
-                        </td>
+                            <td class="allign-middle">
+                                <span class="rounded-circle prof-pic" style=" background-image:url('@item.ProfilePictureUrl')"></span>
+
+                            </td>
+                        }
+                        @if (item.ProfilePictureUrl == null)
+                        {
+                            <td class="allign-middle">
+                                <p>Picture was not provided</p>
+                            </td>
                         }
                         <td class="allign-middle">
                             @Html.DisplayFor(modelItem => item.Country)
@@ -57,8 +58,8 @@
 
                             </a>
                             <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.Id">
-                               
-                                 <i class="bi bi-eye" data-toggle="tooltip" data-placement="top" title="Details" ></i>
+
+                                <i class="bi bi-eye" data-toggle="tooltip" data-placement="top" title="Details"></i>
 
                             </a>
                             <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id">
@@ -69,7 +70,7 @@
                 }
             </tbody>
         </table>
-       
+
 
     </div>
 </div>
