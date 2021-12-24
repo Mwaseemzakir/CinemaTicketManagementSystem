@@ -1,6 +1,7 @@
 ﻿using CinemaTicketManagementSystem.Database;
 using CinemaTicketManagementSystem.Interfaces;
 using CinemaTicketManagementSystem.Models;
+using CinemaTicketManagementSystem.Utils.Helpers;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -18,12 +19,39 @@ namespace CinemaTicketManagementSystem.Services
         }
         public async Task<string> Add(Movie model)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                if (!String.IsNullOrEmpty(model.ImageURL))
+                {
+                    string imageUrl = Helpers.AddFile(model.ImageURL);
+                    model.ImageURL = imageUrl;
+                    Helpers.AddFile(model.ImageURL);
+                }
+                _context.Movies.Add(model);
+                await _context.SaveChangesAsync();
+                return "true";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
 
-        public async Task<string> Delete(Movie model)
+        public async Task<string> Delete(int Id)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                if (Id <= 0) return "Invalid Id";
+                var movie = await _context.Movies.FindAsync(Id);
+                if (movie == null) return "No record found";
+                _context.Movies.Remove(movie);
+                await _context.SaveChangesAsync();
+                return "true";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
 
         public async Task<List<Movie>> GetAll(string name)
@@ -43,20 +71,45 @@ namespace CinemaTicketManagementSystem.Services
                 return new List<Movie>();   
                             
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
 
         public async Task<Movie> GetById(int Id)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                if (Id < 0) return new Movie();
+                var item = await _context.Movies.FindAsync(Id);
+                if (item == null) return new Movie();
+                return item;
+            }
+            catch (Exception)
+            {
+                return new Movie();
+            }
         }
 
         public async Task<string> Update(Movie model)
         {
-            throw new System.NotImplementedException();
+            if (model == null || model.Id <= 0) return "Incomplete Information";
+            var movie = await _context.Movies.FindAsync(model.Id);
+            if (movie == null) return "Record does not exist";
+            if (model.ImageURL != null)
+            {
+                //First Remove Existing File from Folder and then Add New One 
+            }
+            movie.CinemaId = model.CinemaId;
+            movie.ProducerId = model.ProducerId;
+            movie.Description = model.Description;
+            movie.StartDate = model.StartDate;
+            movie.EndDate = model.EndDate;
+            movie.Price = model.Price;
+            movie.Name = model.Name;
+            await _context.SaveChangesAsync();
+            return "true"; 
         }
     }
 }

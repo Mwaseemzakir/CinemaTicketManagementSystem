@@ -23,14 +23,14 @@
             <div class="col-md-3 col-sm-6">
                 <div class="form-group">
                     <label asp-for="StartDate">Start Date</label>
-                    <input type="text" class="form-control" id="StartDate" asp-for="StartDate">
+                    <input type="date" class="form-control" id="StartDate" asp-for="StartDate">
                     <span asp-validation-for="StartDate" class="text-danger"></span>
                 </div>
             </div>
             <div class="col-md-3 col-sm-6">
                 <div class="form-group">
                     <label asp-for="EndDate">End Date</label>
-                    <input type="text" class="form-control" id="EndDate" asp-for="EndDate">
+                    <input type="date" class="form-control" id="EndDate" asp-for="EndDate">
                     <span asp-validation-for="EndDate" class="text-danger"></span>
                 </div>
             </div>
@@ -47,6 +47,34 @@
                     </select>
                 <span asp-validation-for="MovieCategory" class="text-danger"></span>
                 </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6">
+                 <div class="form-group">
+                      <label asp-for="CinemaId">Cinema</label>
+                      <select class="form-control" id="CinemaId" asp-for="CinemaId"> 
+                          <option>Select Cinema</option>
+                          @foreach (var item in ViewBag.Cinemas)
+                         {
+                              <option value="@item.Id">@item.Name</option>
+                         }
+                      </select>
+
+                 </div>
+            </div>
+
+             <div class="col-md-3 col-sm-6">
+                 <div class="form-group">
+                      <label asp-for="ProducerId">Producer</label>
+                      <select class="form-control" id="ProducerId" asp-for="ProducerId"> 
+                          <option>Select Producer</option>
+                          @foreach (var item in ViewBag.Producers)
+                         {
+                              <option value="@item.Id">@item.FullName</option>
+                         }
+                      </select>
+
+                 </div>
             </div>
             
             <div class="col-md-3 col-sm-6">

@@ -6,9 +6,11 @@ namespace CinemaTicketManagementSystem.Controllers
     public class MoviesController : Controller
     { 
         private readonly IMoviesService _service;
-        public MoviesController(IMoviesService service)
+        private readonly IMasterService _masterService;
+        public MoviesController(IMoviesService service,IMasterService masterService)
         {
             _service = service;
+            _masterService = masterService; 
         }
         public async Task<IActionResult> Index()
         {
@@ -16,8 +18,10 @@ namespace CinemaTicketManagementSystem.Controllers
             ViewBag.Movies = movies;
             return View();
         }
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            ViewBag.Producers = await _masterService.GetAllProducersAsync();
+            ViewBag.Cinemas = await _masterService.GetAllCinemasAsync();
             return View();
         }
     }

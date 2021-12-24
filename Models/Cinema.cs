@@ -6,7 +6,7 @@ namespace CinemaTicketManagementSystem.Models
     public class Cinema
     {
         [Key]
-        public int CinemaId { get; set; }
+        public int Id { get; set; }
 
         [Display(Name ="Cinema Name")]
         public string Name { get; set; }

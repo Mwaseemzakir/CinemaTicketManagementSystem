@@ -1,6 +1,7 @@
 ﻿using CinemaTicketManagementSystem.Database;
 using CinemaTicketManagementSystem.Interfaces;
 using CinemaTicketManagementSystem.Models;
+using CinemaTicketManagementSystem.Utils.Helpers;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -21,24 +22,12 @@ namespace CinemaTicketManagementSystem.Services
         {
             try
             {
-                if(model.ProfilePictureUrl != null)
+                if(!String.IsNullOrEmpty(model.ProfilePictureUrl))
                 {
-                    string imagesFolderPath = "Files/Images";
-
-                    //If Folder does not exists then create it
-                    if (!File.Exists(imagesFolderPath)) 
-                    {
-                        Directory.CreateDirectory(imagesFolderPath);
-                    }
-
-                    // To avoid files name replication I have used GUID
-                    string imageUrl = Guid.NewGuid().ToString() + Path.GetExtension(model.ProfilePictureUrl);
-                    
-                    //Below two lines are responsible to copy image in our images folder
-                    byte[] imageBytes = Convert.FromBase64String(model.ProfilePictureUrl);
-                    File.WriteAllBytes(imagesFolderPath, imageBytes);
+                    string imageUrl = Helpers.AddFile(model.ProfilePictureUrl);
                     model.ProfilePictureUrl = imageUrl;
                 }
+                Helpers.AddFile(model.ProfilePictureUrl);
                 //Save Data in Table
                 _context.Actors.Add(model);
                 await _context.SaveChangesAsync();

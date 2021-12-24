@@ -12,6 +12,7 @@ namespace CinemaTicketManagementSystem.Utils
             services.AddScoped<IProducersService, ProducersService>();
             services.AddScoped<ICinemasService, CinemasService>();
             services.AddScoped<IMoviesService, MoviesService>();
+            services.AddScoped<IMasterService, MasterService>();
         }
     }
 }
