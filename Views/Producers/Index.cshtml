@@ -1,4 +1,4 @@
-﻿@*Model*@ 
+﻿@*Model*@
 
 @model CinemaTicketManagementSystem.Models.Producer
 @*View Data or C# Code*@
@@ -7,52 +7,69 @@
 
 
 <div class="row">
-    
+
     <div class="col-md-8 offset-md-2">
+        <a class="btn btn-info float-right mb-4" asp-action="Create">Add New Producer</a>
         <table class="table">
             <thead>
                 <tr>
-                     <th> @Html.DisplayNameFor(model => model.ProfilePictureUrl)</th> 
-                     <th> @Html.DisplayNameFor(model => model.Country)</th> 
-                     <th> @Html.DisplayNameFor(model => model.FullName)</th> 
-                     <th> @Html.DisplayNameFor(model => model.Bio)</th> 
-                     <th> Actions </th> 
+                    <th> @Html.DisplayNameFor(model => model.ProfilePictureUrl)</th>
+                    <th> @Html.DisplayNameFor(model => model.Country)</th>
+                    <th> @Html.DisplayNameFor(model => model.FullName)</th>
+                    <th> @Html.DisplayNameFor(model => model.Bio)</th>
+                    <th> Actions </th>
                 </tr>
             </thead>
             <tbody>
-                 @foreach (var item in ViewBag.Producers)
+                @foreach (var item in ViewBag.Producers)
                 {
                     <tr>
-                         <td class="allign-middle">
-                            <span class="rounded-circle prof-pic" style=" background-image:url('@item.ProfilePictureUrl')"></span>
+                        @if (item.ProfilePictureUrl != null)
+                        {
+                            <td class="allign-middle">
+                                <span class="rounded-circle prof-pic" style=" background-image:url('@item.ProfilePictureUrl')"></span>
 
-                       </td>
+                            </td>
+                        }
+                        @if (item.ProfilePictureUrl == null)
+                        {
+                            @*<td class="col-md-6 pr-md-0 d-flex justify-content-center align-items-center allign-middle">
+                                <i class="bi bi-image text-danger fa-2x"></i>
+                                </td>
+                            *@
+                            <td class="col-md-6 pr-md-0 d-flex justify-content-center align-items-center">
 
-                       <td class="allign-middle">
-                           @item.Country
-                       </td>
+                                <i class="bi bi-image text-danger fa-2x"></i>
 
-                       <td class="allign-middle">
+                            </td>
+
+                        }
+
+                        <td class="allign-middle">
+                            @item.Country
+                        </td>
+
+                        <td class="allign-middle">
                             @item.FullName
-                       </td>
-                       <td class="allign-middle">
-                               @item.Bio
-                       </td>
-                         <td class="allign-middle">
-                            <a class="btn btn-outline-success">
+                        </td>
+                        <td class="allign-middle">
+                            @item.Bio
+                        </td>
+                        <td class="allign-middle">
+                            <a class="btn btn-outline-success" asp-action="Edit" asp-route-id="@item.Id">
                                 <i class="bi bi-pencil" data-toggle="tooltip" data-placement="top" title="Edit"></i>
 
                             </a>
-                            <a class="btn btn-outline-info">
+                            <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.Id">
                                 <i class="bi bi-eye" data-toggle="tooltip" data-placement="top" title="Details"></i>
 
                             </a>
-                            <a class="btn btn-outline-danger">
+                            <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id">
                                 <i class="bi bi-trash" data-toggle="tooltip" data-placement="top" title="Delete"></i>
                             </a>
                         </td>
-                    </tr> 
-                 }
+                    </tr>
+                }
             </tbody>
         </table>
     </div>

@@ -16,6 +16,7 @@ namespace CinemaTicketManagementSystem.Services
         }
         public async Task<List<Cinema>> GetAllCinemasAsync() => await _context.Cinemas.ToListAsync();
         public async Task<List<Producer>> GetAllProducersAsync() => await _context.Producers.ToListAsync();
-        
+        public async Task<List<Actor>> GetAllActorsAsync() => await _context.Actors.ToListAsync();
+
     }
 }

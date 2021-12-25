@@ -39,9 +39,10 @@
                         }
                         @if (item.ProfilePictureUrl == null)
                         {
-                            <td class="allign-middle">
-                                <p>Picture was not provided</p>
+                            <td class="col-md-6 pr-md-0 d-flex justify-content-center align-items-center">
+                               <i class="bi bi-image text-danger fa-2x"></i>
                             </td>
+                          
                         }
                         <td class="allign-middle">
                             @Html.DisplayFor(modelItem => item.Country)

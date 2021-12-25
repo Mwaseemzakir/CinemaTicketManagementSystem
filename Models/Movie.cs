@@ -10,6 +10,8 @@ namespace CinemaTicketManagementSystem.Models
     {
         [Key]
         public int Id { get; set; }
+        [Required(ErrorMessage = "Enter Name Please")]
+        [StringLength(30, MinimumLength = 3, ErrorMessage = "Name should be between 3 and 30 characters")]
         public string Name { get; set; }
 
         public string Description { get; set; }
@@ -25,12 +27,15 @@ namespace CinemaTicketManagementSystem.Models
 
         //CinemaId is FK here we have def
         [ForeignKey("CinemaId")]
+
+        [Required(ErrorMessage = "Select Cinema Please")]
         public int CinemaId { get; set; }
         public Cinema Cinema { get; set; }
 
 
         //Producer
         [ForeignKey("ProducerId")]
+        [Required(ErrorMessage = "Select Producer Please")]
         public int ProducerId { get; set; }
         public Producer Producer{ get; set; }
 

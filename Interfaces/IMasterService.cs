@@ -8,5 +8,6 @@ namespace CinemaTicketManagementSystem.Interfaces
     {
         public Task<List<Cinema>> GetAllCinemasAsync();
         public Task<List<Producer>> GetAllProducersAsync();
+        public Task<List<Actor>> GetAllActorsAsync();
     }
 }

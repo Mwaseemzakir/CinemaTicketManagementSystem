@@ -26,16 +26,15 @@ namespace CinemaTicketManagementSystem.Services
                 {
                     string imageUrl = Helpers.AddFile(model.ProfilePictureUrl);
                     model.ProfilePictureUrl = imageUrl;
+                    Helpers.AddFile(model.ProfilePictureUrl);
                 }
-                Helpers.AddFile(model.ProfilePictureUrl);
-                //Save Data in Table
                 _context.Actors.Add(model);
                 await _context.SaveChangesAsync();
                 return "true";
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return ex.Message;
+                throw;
             }   
         }
 
@@ -50,9 +49,9 @@ namespace CinemaTicketManagementSystem.Services
                 await _context.SaveChangesAsync();
                 return "true";
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return ex.Message;
+                throw;
             }
         }
 
@@ -94,24 +93,32 @@ namespace CinemaTicketManagementSystem.Services
             }
             catch (Exception)
             {
-                return new Actor();
+                throw;
             }
         }
 
         public async Task<string> Update(Actor model)
         {
-            if (model == null || model.Id <= 0) return "Incomplete Information";
-            var actor = await _context.Actors.FindAsync(model.Id);
-            if (actor == null) return "Record does not exist";
-             if(model.ProfilePictureUrl != null)
+            try
             {
-                //First Remove Existing File from Folder and then Add New One 
+                if (model == null || model.Id <= 0) return "Incomplete Information";
+                var actor = await _context.Actors.FindAsync(model.Id);
+                if (actor == null) return "Record does not exist";
+                if (model.ProfilePictureUrl != null)
+                {
+                    //First Remove Existing File from Folder and then Add New One 
+                }
+                actor.Country = model.Country;
+                actor.Bio = model.Bio;
+                actor.FullName = model.FullName;
+                await _context.SaveChangesAsync();
+                return "true";
             }
-            actor.Country = model.Country;
-            actor.Bio = model.Bio;
-            actor.FullName = model.FullName;
-            await _context.SaveChangesAsync();
-            return "true";
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }
