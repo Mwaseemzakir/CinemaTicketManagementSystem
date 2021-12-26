@@ -34,7 +34,7 @@ namespace CinemaTicketManagementSystem.Controllers
             {
                 return View(movie);
             }
-            await _service.Add(movie);
+            await _service.AddAsync(movie);
             return RedirectToAction("Index");
         }
     }

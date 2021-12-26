@@ -1,5 +1,6 @@
 ﻿using CinemaTicketManagementSystem.Database;
 using CinemaTicketManagementSystem.Interfaces;
+using CinemaTicketManagementSystem.Interfaces.Base;
 using CinemaTicketManagementSystem.Models;
 using CinemaTicketManagementSystem.Utils.Helpers;
 using Microsoft.EntityFrameworkCore;
@@ -18,7 +19,7 @@ namespace CinemaTicketManagementSystem.Services
         {
             _context = context;
         }
-        public async Task<string> Add(Actor model)
+        public async Task<string> AddAsync(Actor model)
         {
             try
             {
@@ -38,7 +39,7 @@ namespace CinemaTicketManagementSystem.Services
             }   
         }
 
-        public async Task<string> Delete(int Id)
+        public async Task<string> DeleteAsync(int Id)
         {
             try
             {
@@ -82,7 +83,7 @@ namespace CinemaTicketManagementSystem.Services
             }
         }
 
-        public async Task<Actor> GetById(int Id)
+        public async Task<Actor> GetByIdAsync(int Id)
         {
             try
             {
@@ -97,7 +98,7 @@ namespace CinemaTicketManagementSystem.Services
             }
         }
 
-        public async Task<string> Update(Actor model)
+        public async Task<string> UpdateAsync(Actor model)
         {
             try
             {

@@ -17,7 +17,7 @@ namespace CinemaTicketManagementSystem.Services
         {
             _context = context;
         }
-        public async Task<string> Add(Movie model)
+        public async Task<string> AddAsync(Movie model)
         {
             try
             {
@@ -37,7 +37,7 @@ namespace CinemaTicketManagementSystem.Services
             }
         }
 
-        public async Task<string> Delete(int Id)
+        public async Task<string> DeleteAsync(int Id)
         {
             try
             {
@@ -77,7 +77,7 @@ namespace CinemaTicketManagementSystem.Services
             }
         }
 
-        public async Task<Movie> GetById(int Id)
+        public async Task<Movie> GetByIdAsync(int Id)
         {
             try
             {
@@ -92,7 +92,7 @@ namespace CinemaTicketManagementSystem.Services
             }
         }
 
-        public async Task<string> Update(Movie model)
+        public async Task<string> UpdateAsync(Movie model)
         {
             if (model == null || model.Id <= 0) return "Incomplete Information";
             var movie = await _context.Movies.FindAsync(model.Id);

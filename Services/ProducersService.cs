@@ -17,7 +17,7 @@ namespace CinemaTicketManagementSystem.Services
         {
             _context = context;
         }
-        public async Task<string> Add(Producer model)
+        public async Task<string> AddAsync(Producer model)
         {
             try
             {
@@ -39,7 +39,7 @@ namespace CinemaTicketManagementSystem.Services
             }
         }
 
-        public async Task<string> Delete(int Id)
+        public async Task<string> DeleteAsync(int Id)
         {
             try
             {
@@ -80,7 +80,7 @@ namespace CinemaTicketManagementSystem.Services
             }
         }
 
-        public async Task<Producer> GetById(int Id)
+        public async Task<Producer> GetByIdAsync(int Id)
         {
             try
             {
@@ -95,7 +95,7 @@ namespace CinemaTicketManagementSystem.Services
             }
         }
 
-        public async Task<string> Update(Producer model)
+        public async Task<string> UpdateAsync(Producer model)
         {
             try
             {

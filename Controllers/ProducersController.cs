@@ -30,7 +30,7 @@ namespace CinemaTicketManagementSystem.Controllers
             {
                 return View(producer);
             }
-            await _service.Add(producer);
+            await _service.AddAsync(producer);
             return RedirectToAction("Index");
         }
       
@@ -42,26 +42,26 @@ namespace CinemaTicketManagementSystem.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(int Id)
         {
-            var details = await _service.GetById(Id);
+            var details = await _service.GetByIdAsync(Id);
             return View(details);
         }
 
         [HttpGet]
         public async Task<IActionResult> Edit(int Id)
         {
-            var details = await _service.GetById(Id);
+            var details = await _service.GetByIdAsync(Id);
             return View(details);
         }
 
         public async Task<IActionResult> Update(Producer model)
         {
-            var producer = await _service.Update(model);
+            var producer = await _service.UpdateAsync(model);
             return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> Delete(int Id)
         {
-            await _service.Delete(Id);
+            await _service.DeleteAsync(Id);
             return RedirectToAction("Index");
         }
     }
