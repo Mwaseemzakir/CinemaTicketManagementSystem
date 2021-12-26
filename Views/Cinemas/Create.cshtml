@@ -5,9 +5,8 @@
 
 
 <div class="container">
-    <form asp-action="Update">
+    <form asp-action="Create">
         <div class="row">
-            <input  type="hidden" asp-for="Id"/>
             <div class="col-md-3 col-sm-6">
                 <div class="form-group">
                     <label asp-for="Name">Name</label>
@@ -39,7 +38,7 @@
             </div>
             <div class="col-6">
                 <div class="form-group">
-                    <input type="submit" value="Update" class="btn btn-info float-right" />
+                    <input type="submit" value="Create" class="btn btn-info float-right" />
                 </div>
             </div>
         </div>

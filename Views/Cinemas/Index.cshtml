@@ -9,6 +9,7 @@
 <div class="row">
     
     <div class="col-md-8 offset-md-2">
+           <a class="btn btn-info float-right mb-4" asp-action="Create">Add New Cinema</a>
         <table class="table">
             <thead>
                 <tr>
@@ -22,12 +23,21 @@
                  @foreach (var item in ViewBag.Cinemas)
                 {
                     <tr>
-                         <td class="allign-middle">
-                            <span class="rounded-circle prof-pic" style=" background-image:url('@item.Logo')"></span>
+                          @if (item.Logo != null)
+                        {
+                            <td class="allign-middle">
+                                <span class="rounded-circle prof-pic" style=" background-image:url('@item.Logo')"></span>
 
-                       </td>
+                            </td>
+                        }
+                        @if (item.Logo == null)
+                        {
+                            <td class="col-md-6 pr-md-0 d-flex justify-content-center align-items-center">
 
-                      
+                                <i class="bi bi-image text-danger fa-2x"></i>
+
+                            </td>
+                        }
 
                        <td class="allign-middle">
                             @item.Name
@@ -36,15 +46,15 @@
                                @item.Description
                        </td>
                        <td class="allign-middle">
-                            <a class="btn btn-outline-success">
+                            <a class="btn btn-outline-success" asp-action="Edit" asp-route-id="@item.Id">
                                 <i class="bi bi-pencil" data-toggle="tooltip" data-placement="top" title="Edit"></i>
 
                             </a>
-                            <a class="btn btn-outline-info">
+                            <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.Id">
                                 <i class="bi bi-eye" data-toggle="tooltip" data-placement="top" title="Details"></i>
 
                             </a>
-                            <a class="btn btn-outline-danger">
+                            <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id">
                                 <i class="bi bi-trash" data-toggle="tooltip" data-placement="top" title="Delete"></i>
                             </a>
                         </td>

@@ -55,7 +55,7 @@ namespace CinemaTicketManagementSystem.Controllers
 
         public async Task<IActionResult> Update(Producer model)
         {
-            var producer = await _service.UpdateAsync(model);
+            await _service.UpdateAsync(model);
             return RedirectToAction("Index");
         }
 
