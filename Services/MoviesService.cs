@@ -82,8 +82,27 @@ namespace CinemaTicketManagementSystem.Services
             try
             {
                 if (Id < 0) return new Movie();
-                var item = await _context.Movies.FindAsync(Id);
+                var item = await _context.Movies
+                    .Include(X => X.Producer)
+                    .Include(x => x.Cinema)
+                    .Include(x => x.ActorsMovies)
+                    .Include(X => X.ActorsMovies).ThenInclude(X => X.Actor)
+                    .FirstOrDefaultAsync(x => x.Id == Id);
                 if (item == null) return new Movie();
+                //var required = new Movie
+                //{
+                //   Name = item.Name,
+                //   Description = item.Description,
+                //   Id = item.Id,
+                //   EndDate = item.EndDate,
+                //   StartDate = item.StartDate,
+                //   ImageURL = item.ImageURL,
+                //   MovieCategory = item.MovieCategory,
+                //   Price = item.Price,
+                //   ProducerId = item.ProducerId,
+                //   CinemaId = item.CinemaId,
+                //   ActorsMovies = item.ActorsMovies.Where(x => x.MovieId == item.Id).ToList(),
+                //};
                 return item;
             }
             catch (Exception)

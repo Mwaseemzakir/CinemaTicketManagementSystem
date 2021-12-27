@@ -1,0 +1,153 @@
+﻿@using CinemaTicketManagementSystem.Enums
+@using CinemaTicketManagementSystem.Utils.Helpers
+@model CinemaTicketManagementSystem.Models.Movie
+<h4>Movie Details</h4>
+<hr />
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 pr-md-0  fa-4x">
+            <div class="form-group">
+                <img src="@Model.ImageURL" width="100%" height="auto" alt="@Model.Name">
+
+            </div>
+        </div>
+        <div class="col-md-9 col-sm-6">
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <div class="form-group">
+                        <label asp-for="Name"> <b>Movie Name</b></label>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="form-group">
+                        <label><small>@Model.Name</small></label>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="form-group">
+                        <label asp-for="Price"> <b>Ticket Price</b></label>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="form-group">
+                        <label><small>@Model.Price  RS</small></label>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="form-group">
+                        <label asp-for="StartDate"> <b>Starting Date</b></label>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="form-group">
+                        <label><small>@Model.StartDate.ToString("yyyy-MM-dd")</small></label>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="form-group">
+                        <label asp-for="EndDate"> <b>End Date</b></label>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="form-group">
+                        <label><small>@Model.EndDate.ToString("yyyy-MM-dd")</small></label>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="form-group">
+                        <label asp-for="MovieCategory"> <b>Category</b></label>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="form-group">
+                        <label><small>@Model.MovieCategory</small></label>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <p><b>Status</b></p>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <p>
+                        <small>
+                            @if (DateTime.Now >= Model.StartDate && DateTime.Now <= Model.EndDate)
+                            {
+                                <small class="badge bg-success text-white"> RUNNING</small>
+                            }
+                            else if (DateTime.Now > Model.EndDate)
+                            {
+                                <small class="badge bg-danger text-white">EXPIRED</small>
+                            }
+                            else
+                            {
+                                <small class="badge bg-primary text-white">UPCOMING</small>
+                            }
+                        </small>
+                    </p>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="form-group">
+                        <label asp-for="Cinema"> <b>Cinema</b></label>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="form-group">
+                        <label><small>@Model.Cinema?.Name</small></label>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="form-group">
+                        <label asp-for="Producer"> <b>Producer</b></label>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="form-group">
+                        <label><small>@Model.Producer?.FullName</small></label>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="form-group">
+                        <label asp-for="ActorsMovies"> <b>Actors</b></label>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="form-group">
+                        <label>
+                            <small>
+                                @{
+                                    var list = @Model.ActorsMovies.Select(x => x?.Actor?.FullName).ToList();
+                                    var commaSeperatedActors = Helpers.ConvertListToCommaSeperatedString(list);
+                                }
+                                @commaSeperatedActors
+                            </small>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                <a class="btn btn-primary float-left" asp-action="Index">Back to List</a>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                <a class="btn btn-success float-right" asp-action="Index" asp-route-id="@Model.Id">Add to Cart(@Model.Price) RS</a>
+            </div>
+        </div>
+    </div>
+
+</div>*
+
+
+
+@section Scripts
+    {
+         @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+         }
+    }
+

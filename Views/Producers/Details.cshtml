@@ -1,6 +1,6 @@
 ﻿@using CinemaTicketManagementSystem.Utils
 @model CinemaTicketManagementSystem.Models.Producer
-<h4>Add New Producer</h4>
+<h4>Producer Details</h4>
 <hr />
 
 
@@ -51,7 +51,7 @@
         </div>
         <div class="col-6">
             <div class="form-group">
-                <a class="btn btn-info float-right" asp-action="Edit" >Edit</a>
+                <a class="btn btn-info float-right" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
             </div>
         </div>
     </div>

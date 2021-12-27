@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace CinemaTicketManagementSystem.Utils.Helpers
 {
@@ -33,6 +35,16 @@ namespace CinemaTicketManagementSystem.Utils.Helpers
         public static void RemoveFile(string fileName)
         {
 
+        }
+
+        public static string ConvertListToCommaSeperatedString(List<string> list)
+        {
+            if(list.Any() && list.Count > 0)
+            {
+                return String.Join(",", list);
+            }
+            return "";
+            
         }
 
 

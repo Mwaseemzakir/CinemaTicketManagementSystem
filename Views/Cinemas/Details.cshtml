@@ -1,11 +1,10 @@
 ﻿@using CinemaTicketManagementSystem.Utils
 @model CinemaTicketManagementSystem.Models.Cinema
-<h4>Add New Cinema</h4>
+<h4>Cinema Details</h4>
 <hr />
 
 
 <div class="container">
-    <form asp-action="Create">
         <div class="row">
              
             <div class="col-md-3 col-sm-6">
@@ -39,11 +38,10 @@
             </div>
             <div class="col-6">
                 <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-info float-right" />
+                    <a class="btn btn-primary float-right" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
                 </div>
             </div>
         </div>
-    </form>
 </div>
 @section Scripts
     {

@@ -37,5 +37,15 @@ namespace CinemaTicketManagementSystem.Controllers
             await _service.AddAsync(movie);
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(int Id)
+        {
+            ViewBag.Producers = await _masterService.GetAllProducersAsync();
+            ViewBag.Cinemas = await _masterService.GetAllCinemasAsync();
+            ViewBag.Actors = await _masterService.GetAllActorsAsync();
+            var details = await _service.GetByIdAsync(Id);
+            return View(details);
+        }
     }
 }
