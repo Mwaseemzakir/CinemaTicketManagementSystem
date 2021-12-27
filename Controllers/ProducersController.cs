@@ -43,7 +43,6 @@ namespace CinemaTicketManagementSystem.Controllers
         public async Task<IActionResult> Details(int Id)
         {
             var details = await _service.GetByIdAsync(Id);
-            ViewBag.Title = "I am setting Title of Page";
             return View(details);
         }
 
