@@ -1,23 +1,18 @@
 ﻿@using CinemaTicketManagementSystem.Enums
-@model CinemaTicketManagementSystem.Models.Movie
+@model MovieVM
 <h4>Add New Movie</h4>
 <hr />
 
 <div class="container">
     <form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger">
+        </div>
         <div class="row">
             <div class="col-md-3 col-sm-6">
                 <div class="form-group">
                     <label asp-for="Name">Movie Name</label>
                     <input type="text" class="form-control" id="Name" placeholder="e.g. ABC" asp-for="Name">
                     <span asp-validation-for="Name" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <div class="form-group">
-                    <label asp-for="Description">Description</label>
-                    <input type="text" class="form-control" id="Description" placeholder="e.g. Non stop action" asp-for="Description">
-                    <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
             </div>
             <div class="col-md-3 col-sm-6">
@@ -36,14 +31,16 @@
             </div>
             <div class="col-md-3 col-sm-6">
                 <div class="form-group">
+                    <label asp-for="Price">Price</label>
+                    <input type="number" class="form-control" id="Price" asp-for="Price">
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6">
+                <div class="form-group">
                     <label asp-for="MovieCategory">Movie Category</label>
                     <select class="form-control" id="MovieCategory" asp-for="MovieCategory">
-                        <option>Select Category</option>
-                        @foreach (var item in Enum.GetValues(typeof(MoviesCategoryEnum)))
-                        {
-                            <option>@item</option>
-                        }
-
                     </select>
                     <span asp-validation-for="MovieCategory" class="text-danger"></span>
                 </div>
@@ -52,12 +49,7 @@
             <div class="col-md-3 col-sm-6">
                 <div class="form-group">
                     <label asp-for="CinemaId">Cinema</label>
-                    <select class="form-control" id="CinemaId" asp-for="CinemaId">
-                        <option>Select Cinema</option>
-                        @foreach (var item in ViewBag.Cinemas)
-                        {
-                            <option value="@item.Id">@item.Name</option>
-                        }
+                    <select class="form-control" id="CinemaId" asp-for="CinemaId" asp-items="@ViewBag.Cinemas">
                     </select>
 
                 </div>
@@ -66,29 +58,27 @@
             <div class="col-md-3 col-sm-6">
                 <div class="form-group">
                     <label asp-for="ProducerId">Producer</label>
-                    <select class="form-control" id="ProducerId" asp-for="ProducerId">
-                        <option>Select Producer</option>
-                        @foreach (var item in ViewBag.Producers)
-                        {
-                            <option value="@item.Id">@item.FullName</option>
-                        }
+                    <select class="form-control" id="ProducerId" asp-for="ProducerId" asp-items="@ViewBag.Producers">
                     </select>
 
                 </div>
             </div>
-
-        @*    <div class="col-md-3 col-sm-6">
+            <div class="col-md-9 col-sm-6">
                 <div class="form-group">
-                      <label asp-for="ActorsMovies">Actors</label>
-                    <select class="form-control" multiple aria-label="Select Actors" asp-for="Actors">
-                       <option>Select Actors</option>
-                        @foreach (var item in ViewBag.Actors)
-                        {
-                            <option value="@item.Id">@item.Name</option>
-                        }
-                    </select>
+                    <label asp-for="Description">Description</label>
+                    <textarea class="form-control" id="Description" placeholder="e.g. Non stop action" asp-for="Description" style="height: 102px;">
+                     </textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
-            </div>*@
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="form-group">
+                    <label asp-for="ActorIds">Actors</label>
+                    <select class="form-control" id="ActorIds" asp-for="ActorIds" asp-items="@ViewBag.Actors" multiple>
+                    </select>
+
+                </div>
+            </div>
 
             <div class="col-md-3 col-sm-6">
                 <div class="form-group">

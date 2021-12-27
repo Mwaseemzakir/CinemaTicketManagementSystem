@@ -1,6 +1,7 @@
 ﻿using CinemaTicketManagementSystem.Interfaces;
 using CinemaTicketManagementSystem.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Threading.Tasks;
 namespace CinemaTicketManagementSystem.Controllers
 {
@@ -21,9 +22,12 @@ namespace CinemaTicketManagementSystem.Controllers
         }
         public async Task<IActionResult> Create()
         {
-            ViewBag.Producers = await _masterService.GetAllProducersAsync();
-            ViewBag.Cinemas = await _masterService.GetAllCinemasAsync();
-            ViewBag.Actors = await _masterService.GetAllActorsAsync();
+            var producersList = await _masterService.GetAllProducersAsync();
+            var cinemasList = await _masterService.GetAllCinemasAsync();
+            var actorsList = await _masterService.GetAllActorsAsync();
+            ViewBag.Producers = new SelectList(producersList,"Id", "FullName");
+            ViewBag.Cinemas = new SelectList(cinemasList, "Id","Name");
+            ViewBag.Actors = new SelectList(actorsList, "Id","FullName");
             return View();
         }
 

@@ -11,12 +11,14 @@ namespace CinemaTicketManagementSystem.Models
         [Display(Name = "Profile Picture")]
         public string ProfilePictureUrl { get; set; }
 
+        [Required(ErrorMessage = "Enter Name Please")]
         [Display(Name = "Name")]
         public string FullName { get; set; }
         [Display(Name = "About")]
-
+        [Required(ErrorMessage = "Enter Bio Please")]
         public string Bio { get; set; }
         [Display(Name = "Country")]
+        [Required(ErrorMessage = "Select Country Please")]
         public string Country { get; set; }
 
         //Relationships
