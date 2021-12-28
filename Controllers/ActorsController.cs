@@ -40,6 +40,7 @@ namespace CinemaTicketManagementSystem.Controllers
             }
             await _service.AddAsync(actor);
             return RedirectToAction("Index");
+
         }
 
         [HttpGet]

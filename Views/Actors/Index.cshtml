@@ -15,7 +15,9 @@
 <div class="row">
 
     <div class="col-md-8 offset-md-2">
-        <a class="btn btn-info float-right mb-4" asp-action="Create">Add New Actor</a>
+        @{
+            await Html.RenderPartialAsync("~/Views/Partial/_CreateItem.cshtml", "Actors");
+        }
         <table class="table">
             <thead>
                 <tr>
@@ -40,9 +42,9 @@
                         @if (item.ProfilePictureUrl == null)
                         {
                             <td class="col-md-6 pr-md-0 d-flex justify-content-center align-items-center">
-                               <i class="bi bi-image text-danger fa-2x"></i>
+                                <i class="bi bi-image text-danger fa-2x"></i>
                             </td>
-                          
+
                         }
                         <td class="allign-middle">
                             @Html.DisplayFor(modelItem => item.Country)
@@ -75,3 +77,4 @@
 
     </div>
 </div>
+

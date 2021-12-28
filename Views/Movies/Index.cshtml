@@ -8,7 +8,9 @@
         </div>
 
         <div class="col-6">
-            <a class="btn btn-success float-right mb-4" asp-action="Create">Add New Movie</a>
+            @{
+                await Html.RenderPartialAsync("~/Views/Partial/_CreateItem.cshtml", "Movies");
+            }
         </div>
     </div>
 
@@ -22,8 +24,8 @@
                         <div class="col-md-12">
                             <div class="card-header">
                                 <h5 class="card-title mb-0">
-                                        @item.Name
-                                    </h5>
+                                    @item.Name
+                                </h5>
                             </div>
                         </div>
                         @if (@item.ImageURL == null)
@@ -34,12 +36,12 @@
                         }
                         @if (@item.ImageURL != null)
                         {
-                            <div class="col-md-6 pr-md-0" >
+                            <div class="col-md-6 pr-md-0">
                                 <img src="@item.ImageURL" width="100%" height="auto" alt="@item.Name">
                             </div>
 
                         }
-                        
+
                         <div class="col-md-6 pl-md-0">
                             <div class="card-body">
                                 <p class="card-text">@item.Description</p>
@@ -48,7 +50,7 @@
                                 <p class="card-text"><b>Start Date: </b> <br><small> @item.StartDate.ToString("dd MMM yy")</small></p>
                                 <p class="card-text"><b>End Date: </b> <br> <small> @item.EndDate.ToString("dd MMM yy") </small></p>
                                 <p class="card-text ">
-                                    <b>Status: </b> <br> 
+                                    <b>Status: </b> <br>
                                     @if (DateTime.Now >= item.StartDate && DateTime.Now <= item.EndDate)
                                     {
                                         <small class="badge bg-success text-white"> RUNNING</small>
@@ -68,7 +70,7 @@
                         <div class="col-md-12">
                             <div class="card-footer ">
                                 <p class="card-text">
-                                    <a class="btn btn-outline-primary float-right" asp-action="Details" asp-route-id="@item.Id"> 
+                                    <a class="btn btn-outline-primary float-right" asp-action="Details" asp-route-id="@item.Id">
                                         <i class="bi bi-eye-fill"></i> Show Details
                                     </a>
                                     <a class="btn btn-success text-white">

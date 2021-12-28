@@ -9,7 +9,9 @@
 <div class="row">
 
     <div class="col-md-8 offset-md-2">
-        <a class="btn btn-info float-right mb-4" asp-action="Create">Add New Producer</a>
+         @{
+            await Html.RenderPartialAsync("~/Views/Partial/_CreateItem.cshtml", "Producers");
+        }
         <table class="table">
             <thead>
                 <tr>
