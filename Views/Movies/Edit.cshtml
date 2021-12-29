@@ -1,15 +1,16 @@
 ﻿@using CinemaTicketManagementSystem.Enums
 @using CinemaTicketManagementSystem.ViewModels
 @model MovieVM
-<h4>Add New Movie</h4>
+<h4>Update Movie</h4>
 <hr/>
 
 <div class="container">
-    <form asp-action="Create">
+    <form asp-action="Update">
         <div asp-validation-summary="ModelOnly" class="text-danger">
         </div>
         <div class="row">
             <div class="col-md-3 col-sm-6">
+                <input type="hidden" asp-for="Id"/>
                 <div class="form-group">
                     <label asp-for="Name">Movie Name</label>
                     <input type="text" class="form-control" id="Name" placeholder="e.g. ABC" asp-for="Name">
@@ -96,7 +97,7 @@
             </div>
             <div class="col-6">
                 <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-info float-right" />
+                    <input type="submit" value="Update" class="btn btn-info float-right" />
                 </div>
             </div>
         </div>

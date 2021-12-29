@@ -2,6 +2,7 @@
 using CinemaTicketManagementSystem.Interfaces;
 using CinemaTicketManagementSystem.Models;
 using CinemaTicketManagementSystem.Utils.Helpers;
+using CinemaTicketManagementSystem.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -21,13 +22,25 @@ namespace CinemaTicketManagementSystem.Services
         {
             try
             {
+                var movie = new Movie
+                {
+                    CinemaId = model.CinemaId,
+                    Description = model.Description,
+                    EndDate = model.EndDate,
+                    StartDate = model.StartDate,
+                    MovieCategory = model.MovieCategory,
+                    Name = model.Name,
+                    Price = model.Price,
+                    ProducerId = model.ProducerId,
+                    ActorsMovies = model.ActorsMovies
+                };
                 if (!String.IsNullOrEmpty(model.ImageURL))
                 {
                     string imageUrl = Helpers.AddFile(model.ImageURL);
-                    model.ImageURL = imageUrl;
+                    movie.ImageURL = imageUrl;
                     Helpers.AddFile(model.ImageURL);
                 }
-                _context.Movies.Add(model);
+                _context.Movies.Add(movie);
                 await _context.SaveChangesAsync();
                 return "true";
             }
@@ -36,7 +49,6 @@ namespace CinemaTicketManagementSystem.Services
                 return ex.Message;
             }
         }
-
         public async Task<string> DeleteAsync(int Id)
         {
             try
@@ -53,7 +65,6 @@ namespace CinemaTicketManagementSystem.Services
                 return ex.Message;
             }
         }
-
         public async Task<List<Movie>> GetAll(string name)
         {
             try
@@ -89,20 +100,6 @@ namespace CinemaTicketManagementSystem.Services
                     .Include(X => X.ActorsMovies).ThenInclude(X => X.Actor)
                     .FirstOrDefaultAsync(x => x.Id == Id);
                 if (item == null) return new Movie();
-                //var required = new Movie
-                //{
-                //   Name = item.Name,
-                //   Description = item.Description,
-                //   Id = item.Id,
-                //   EndDate = item.EndDate,
-                //   StartDate = item.StartDate,
-                //   ImageURL = item.ImageURL,
-                //   MovieCategory = item.MovieCategory,
-                //   Price = item.Price,
-                //   ProducerId = item.ProducerId,
-                //   CinemaId = item.CinemaId,
-                //   ActorsMovies = item.ActorsMovies.Where(x => x.MovieId == item.Id).ToList(),
-                //};
                 return item;
             }
             catch (Exception)
@@ -110,25 +107,50 @@ namespace CinemaTicketManagementSystem.Services
                 return new Movie();
             }
         }
-
+      
         public async Task<string> UpdateAsync(Movie model)
         {
-            if (model == null || model.Id <= 0) return "Incomplete Information";
-            var movie = await _context.Movies.FindAsync(model.Id);
-            if (movie == null) return "Record does not exist";
-            if (model.ImageURL != null)
+            try
             {
-                //First Remove Existing File from Folder and then Add New One 
+                if (model == null || model.Id <= 0) return "Incomplete Information";
+                var movie = await _context.Movies.FindAsync(model.Id);
+                if (movie == null) return "Record does not exist";
+                if (model.ImageURL != null)
+                {
+                    //First Remove Existing File from Folder and then Add New One 
+                }
+                movie.CinemaId = model.CinemaId;
+                movie.ProducerId = model.ProducerId;
+                movie.Description = model.Description;
+                movie.StartDate = model.StartDate;
+                movie.EndDate = model.EndDate;
+                movie.Price = model.Price;
+                movie.Name = model.Name;
+                await _context.SaveChangesAsync();
+                //If new relations are coming then remove existing relation
+                if (model.ActorsMovies.Any() && model.ActorsMovies.Count() > 0)
+                {
+                    //Removing
+                    var existingRelation = await _context.Actors_Movies.Where(x => x.MovieId == model.Id).ToListAsync();
+                    if (existingRelation.Any() && existingRelation.Count() > 0)
+                    {
+                        _context.RemoveRange(existingRelation);
+                    }
+                    //Adding
+                    await _context.AddRangeAsync(model.ActorsMovies);
+                }
+                //Saving DB Changes
+                await _context.SaveChangesAsync();
+                return "true";
+
             }
-            movie.CinemaId = model.CinemaId;
-            movie.ProducerId = model.ProducerId;
-            movie.Description = model.Description;
-            movie.StartDate = model.StartDate;
-            movie.EndDate = model.EndDate;
-            movie.Price = model.Price;
-            movie.Name = model.Name;
-            await _context.SaveChangesAsync();
-            return "true"; 
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
+
+
     }
 }

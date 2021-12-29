@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace CinemaTicketManagementSystem
+namespace CinemaTicketManagementSystem.ViewModels
 {
     public class MovieVM
     {

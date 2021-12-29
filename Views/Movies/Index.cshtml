@@ -23,9 +23,19 @@
                     <div class="row g-0">
                         <div class="col-md-12">
                             <div class="card-header">
-                                <h5 class="card-title mb-0">
-                                    @item.Name
-                                </h5>
+                                <div  class="card-title mb-0 justify-content-between d-flex align-items-center">
+                                    <h5>
+                                        @item.Name
+                                    </h5>
+                                    <div class="tools">
+                                        <a asp-action="Edit" asp-route-id="@item.Id" class="mr-2">
+                                            <i class="bi bi-pencil" data-toggle="tooltip" data-placement="top" title="Edit"></i>
+                                        </a>
+                                        <a asp-action="Delete" asp-route-id="@item.Id">
+                                            <i class="bi bi-trash" data-toggle="tooltip" data-placement="top" title="Delete"></i>
+                                        </a>
+                                    </div>                                      
+                                </div>
                             </div>
                         </div>
                         @if (@item.ImageURL == null)
@@ -85,6 +95,3 @@
         }
     </div>
 </div>
-
-
-
