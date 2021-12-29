@@ -27,7 +27,6 @@ namespace CinemaTicketManagementSystem.Services
                 {
                     string imageUrl = Helpers.AddFile(model.ProfilePictureUrl);
                     model.ProfilePictureUrl = imageUrl;
-                    Helpers.AddFile(model.ProfilePictureUrl);
                 }
                 _context.Actors.Add(model);
                 await _context.SaveChangesAsync();

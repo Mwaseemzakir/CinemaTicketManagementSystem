@@ -1,0 +1,5 @@
+﻿1) For Migrations Copy Command Given Below
+            EntityFrameworkCore\Add-Migration 
+            EntityFrameworkCore\Add-Migration MigrationName
+2) For Updating Database After Migrations Use Following Command
+            EntityFrameworkCore\Update-Database

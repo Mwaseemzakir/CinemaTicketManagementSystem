@@ -6,6 +6,8 @@
 
 <div class="container">
     <form asp-action="Update">
+                <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+
         <div class="row">
             <input  type="hidden" asp-for="Id"/>
             <div class="col-md-3 col-sm-6">

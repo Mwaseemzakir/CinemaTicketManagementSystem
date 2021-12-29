@@ -2,7 +2,7 @@
 @using CinemaTicketManagementSystem.ViewModels
 @model MovieVM
 <h4>Add New Movie</h4>
-<hr/>
+<hr />
 
 <div class="container">
     <form asp-action="Create">
@@ -52,6 +52,7 @@
                     <label asp-for="CinemaId">Cinema</label>
                     <select class="form-control" id="CinemaId" asp-for="CinemaId" asp-items="@ViewBag.Cinemas">
                     </select>
+                    <span asp-validation-for="CinemaId" class="text-danger"></span>
 
                 </div>
             </div>
@@ -61,6 +62,8 @@
                     <label asp-for="ProducerId">Producer</label>
                     <select class="form-control" id="ProducerId" asp-for="ProducerId" asp-items="@ViewBag.Producers">
                     </select>
+                    <span asp-validation-for="ProducerId" class="text-danger"></span>
+
 
                 </div>
             </div>
@@ -77,7 +80,7 @@
                     <label asp-for="ActorIds">Actors</label>
                     <select class="form-control" id="ActorIds" asp-for="ActorIds" asp-items="@ViewBag.Actors" multiple>
                     </select>
-
+                    <span asp-validation-for="ActorIds" class="text-danger"></span>
                 </div>
             </div>
 

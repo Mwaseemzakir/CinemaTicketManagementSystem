@@ -15,7 +15,6 @@ namespace CinemaTicketManagementSystem.Database
                 am.ActorId,
                 am.MovieId
             });
-
             
             model.Entity<Actors_Movies>().HasOne(mov => mov.Movie).WithMany(am => am.ActorsMovies).HasForeignKey(fk => fk.MovieId);
             model.Entity<Actors_Movies>().HasOne(act => act.Actor).WithMany(am => am.ActorsMovies).HasForeignKey(fk => fk.ActorId);
@@ -28,6 +27,8 @@ namespace CinemaTicketManagementSystem.Database
         public DbSet<Producer> Producers { get; set; }
         public DbSet<Cinema> Cinemas { get; set; }
         public DbSet<Actors_Movies> Actors_Movies { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
 
 
 
