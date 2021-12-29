@@ -81,6 +81,14 @@ namespace CinemaTicketManagementSystem.Controllers
             return View("Index");
         }
 
+        public async Task<IActionResult> Delete(int Id)
+        {
+            await _service.DeleteAsync(Id);
+            var results = await _service.GetAll("");
+            ViewBag.Movies = results;
+            return View("Index");
+        }
+
     }
 }
 
