@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CinemaTicketManagementSystem.Migrations
 {
     [DbContext(typeof(CinemaTicketDbContext))]
-    [Migration("20211229213637_OrderTableAdded")]
-    partial class OrderTableAdded
+    [Migration("20211230111056_ShoppingCartItem Table Added")]
+    partial class ShoppingCartItemTableAdded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -205,6 +205,29 @@ namespace CinemaTicketManagementSystem.Migrations
                     b.ToTable("Producers");
                 });
 
+            modelBuilder.Entity("CinemaTicketManagementSystem.Models.ShoppingCartItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("MovieId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ShoppingCartId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MovieId");
+
+                    b.ToTable("ShoppingCartItems");
+                });
+
             modelBuilder.Entity("CinemaTicketManagementSystem.Models.Actors_Movies", b =>
                 {
                     b.HasOne("CinemaTicketManagementSystem.Models.Actor", "Actor")
@@ -260,6 +283,15 @@ namespace CinemaTicketManagementSystem.Migrations
                     b.Navigation("Movie");
 
                     b.Navigation("Order");
+                });
+
+            modelBuilder.Entity("CinemaTicketManagementSystem.Models.ShoppingCartItem", b =>
+                {
+                    b.HasOne("CinemaTicketManagementSystem.Models.Movie", "Movie")
+                        .WithMany()
+                        .HasForeignKey("MovieId");
+
+                    b.Navigation("Movie");
                 });
 
             modelBuilder.Entity("CinemaTicketManagementSystem.Models.Actor", b =>
